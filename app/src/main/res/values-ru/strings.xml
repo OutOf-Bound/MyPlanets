@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="select_the_planet">Выберите планету</string>
+    <string name="mercury">Меркурий</string>
+    <string name="venus">Венера</string>
+    <string name="earth">Земля</string>
+    <string name="mars">Марс</string>
+    <string name="jupiter">Юпитер</string>
+    <string name="saturn">Сатурн</string>
+    <string name="uranus">Уран</string>
+    <string name="neptune">Нептун</string>
+</resources>

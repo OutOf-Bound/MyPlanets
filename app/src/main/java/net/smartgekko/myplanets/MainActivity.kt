@@ -39,10 +39,6 @@ class MainActivity : AppCompatActivity() {
             rotateConstraints(ROTATE_LEFT)
             TransitionManager.beginDelayedTransition(binding.planetsLayout)
         }
-
-        binding.fabSun.setOnClickListener {
-
-        }
     }
 
     private fun rotateConstraints(direction: Int) {
