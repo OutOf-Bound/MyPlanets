@@ -64,7 +64,6 @@
                     android:id="@+id/planetsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:elevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/mercury"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="0"
                         app:layout_constraintCircleRadius="120dp"
@@ -106,9 +106,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/venus"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="45"
-                        app:layout_constraintCircleRadius="120dp">
+                        app:layout_constraintCircleRadius="120dp"
+                        tools:layout_editor_absoluteX="266dp"
+                        tools:layout_editor_absoluteY="35dp">
 
                         <ImageView
                             android:id="@+id/venus"
@@ -134,9 +137,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/earth"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="90"
-                        app:layout_constraintCircleRadius="120dp">
+                        app:layout_constraintCircleRadius="120dp"
+                        tools:layout_editor_absoluteX="301dp"
+                        tools:layout_editor_absoluteY="120dp">
 
                         <ImageView
                             android:id="@+id/earth"
@@ -162,9 +168,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/mars"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="135"
-                        app:layout_constraintCircleRadius="120dp">
+                        app:layout_constraintCircleRadius="120dp"
+                        tools:layout_editor_absoluteX="266dp"
+                        tools:layout_editor_absoluteY="205dp">
 
                         <ImageView
                             android:id="@+id/mars"
@@ -190,9 +199,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/jupiter"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="180"
-                        app:layout_constraintCircleRadius="120dp">
+                        app:layout_constraintCircleRadius="120dp"
+                        tools:layout_editor_absoluteX="181dp"
+                        tools:layout_editor_absoluteY="240dp">
 
                         <ImageView
                             android:id="@+id/jupiter"
@@ -218,9 +230,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/saturn"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="225"
-                        app:layout_constraintCircleRadius="120dp">
+                        app:layout_constraintCircleRadius="120dp"
+                        tools:layout_editor_absoluteX="96dp"
+                        tools:layout_editor_absoluteY="205dp">
 
                         <ImageView
                             android:id="@+id/saturn"
@@ -246,9 +261,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/uranus"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="270"
-                        app:layout_constraintCircleRadius="120dp">
+                        app:layout_constraintCircleRadius="120dp"
+                        tools:layout_editor_absoluteX="61dp"
+                        tools:layout_editor_absoluteY="120dp">
 
                         <ImageView
                             android:id="@+id/uran"
@@ -274,9 +292,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:tag="@string/neptune"
                         app:layout_constraintCircle="@+id/sun"
                         app:layout_constraintCircleAngle="315"
-                        app:layout_constraintCircleRadius="120dp">
+                        app:layout_constraintCircleRadius="120dp"
+                        tools:layout_editor_absoluteX="96dp"
+                        tools:layout_editor_absoluteY="35dp">
 
                         <ImageView
                             android:id="@+id/neptun"
@@ -332,6 +353,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <WebView
+                android:id="@+id/searchWebView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minHeight="300dp" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Планеты</string>
     <string name="select_the_planet">Выберите планету</string>
     <string name="mercury">Меркурий</string>
     <string name="venus">Венера</string>
@@ -9,4 +10,6 @@
     <string name="saturn">Сатурн</string>
     <string name="uranus">Уран</string>
     <string name="neptune">Нептун</string>
+    <string name="planet"> (планета)</string>
+    <string name="sun">Солнце</string>
 </resources>
