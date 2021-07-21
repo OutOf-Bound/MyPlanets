@@ -2,6 +2,9 @@ package net.smartgekko.myplanets.utils
 
 import net.smartgekko.myplanets.BuildConfig
 
+const val ROTATE_LEFT = 1
+const val ROTATE_RIGHT = 2
+
 const val nasaApiKey = BuildConfig.NASA_API_KEY
 const val NASA_POD_API_BASE_URL = "https://api.nasa.gov/planetary/"
 const val NASA_NEO_API_BASE_URL = "https://api.nasa.gov/neo/rest/v1/neo/"
