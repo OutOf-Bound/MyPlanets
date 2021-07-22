@@ -1,12 +1,17 @@
-package net.smartgekko.myplanets
+package net.smartgekko.myplanets.views
 
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebViewClient
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.transition.TransitionManager
+import com.google.android.material.appbar.AppBarLayout
+import net.smartgekko.myplanets.R
 import net.smartgekko.myplanets.databinding.ActivityMainBinding
 import net.smartgekko.myplanets.utils.ROTATE_LEFT
 import net.smartgekko.myplanets.utils.ROTATE_RIGHT
@@ -15,6 +20,7 @@ import net.smartgekko.myplanets.utils.WIKI_BASE_URL
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var planetsArray: ArrayList<LinearLayout>
+    private lateinit var currentPlanetName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,26 +42,45 @@ class MainActivity : AppCompatActivity() {
         binding.searchWebView.webViewClient = WebViewClient()
 
         binding.leftStep.setOnClickListener {
-            rotateConstraints(ROTATE_RIGHT)
-            TransitionManager.beginDelayedTransition(binding.planetsLayout)
+            rotateLeft()
         }
-
         binding.rightStep.setOnClickListener {
-            rotateConstraints(ROTATE_LEFT)
-            TransitionManager.beginDelayedTransition(binding.planetsLayout)
+            rotateRight()
         }
 
         binding.sun.setOnClickListener {
-            letsShowWeb(WIKI_BASE_URL + getString(R.string.sun))
+            letsShowInfo(getString(R.string.sun),"")
         }
+        binding.appbar.addOnOffsetChangedListener(object: AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
+                when(state) {
+                    State.COLLAPSED -> { binding.textPlanet.visibility = View.VISIBLE }
+                    State.EXPANDED -> { binding.textPlanet.visibility = View.INVISIBLE }
+                    State.IDLE -> { binding.textPlanet.visibility = View.INVISIBLE }
+                }
+            }
+        }
+        )
 
-        letsShowWeb(WIKI_BASE_URL + getString(R.string.jupiter) + " (планета)")
+        letsShowInfo(getString(R.string.jupiter)," (планета)")
+    }
+
+    private fun rotateRight() {
+        rotateConstraints(ROTATE_RIGHT)
+        TransitionManager.beginDelayedTransition(binding.planetsLayout)
+    }
+
+    private fun rotateLeft() {
+        rotateConstraints(ROTATE_LEFT)
+        TransitionManager.beginDelayedTransition(binding.planetsLayout)
     }
 
     private fun rotateConstraints(direction: Int) {
+        var currentPlanet = ""
         for (item: LinearLayout in planetsArray) {
             val params = item.getLayoutParams() as ConstraintLayout.LayoutParams
             var currentAngle = params.circleAngle
+            val nameText: TextView = item.findViewWithTag("planetName")
 
             when (direction) {
                 ROTATE_LEFT -> {
@@ -64,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                         params.circleAngle = 45f
                     } else {
                         params.circleAngle = currentAngle
+
                     }
                 }
                 ROTATE_RIGHT -> {
@@ -78,12 +104,19 @@ class MainActivity : AppCompatActivity() {
 
             item.layoutParams = params
             if (currentAngle == 180f) {
-                letsShowWeb(WIKI_BASE_URL + item.tag + " (планета)")
+                currentPlanet = item.tag.toString()
+                nameText.textSize = 30f
+            } else {
+                nameText.textSize = 12f
             }
         }
+        letsShowInfo(currentPlanet," (планета)")
+
     }
 
-    private fun letsShowWeb(url: String) {
-        binding.searchWebView.loadUrl(url)
+    private fun letsShowInfo(currentPlanet: String, extendedString: String) {
+        binding.searchWebView.loadUrl(WIKI_BASE_URL + currentPlanet + extendedString)
+        binding.textPlanet.text = currentPlanet
+        binding.textPlanet.text =currentPlanet
     }
 }
