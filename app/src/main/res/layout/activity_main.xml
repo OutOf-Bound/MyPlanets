@@ -28,7 +28,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/onePlanet"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/onePlanetText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Earth"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp"
+                        android:visibility="invisible"
+                        app:layout_constraintEnd_toEndOf="@+id/onePlanetImage"
+                        app:layout_constraintStart_toStartOf="@+id/onePlanetImage"
+                        app:layout_constraintTop_toBottomOf="@+id/onePlanetImage" />
+
+                    <ImageView
+                        android:id="@+id/onePlanetImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/earth" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
@@ -46,6 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         app:srcCompat="@android:drawable/ic_media_rew" />
 
                     <TextView
@@ -58,14 +94,15 @@
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="24sp"
-                        android:visibility="invisible" />
+                        android:visibility="visible" />
 
                     <ImageView
-                        android:id="@+id/leftStep"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/smallTumb"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_media_ff" />
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/planets_logo" />
 
                 </LinearLayout>
 
@@ -78,281 +115,287 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:id="@+id/the1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/mercury"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="0"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="181dp"
-                        tools:layout_editor_absoluteY="205dp">
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/planetsGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:constraint_referenced_ids="the1,the2,the3,the4,the5,the6,the7,the8"/>
 
-                        <ImageView
-                            android:id="@+id/mercury"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:elevation="1dp"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/mercury" />
-
-                        <TextView
-                            android:id="@+id/mercuryName"
+                        <LinearLayout
+                            android:id="@+id/the1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/mercury"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/mercury"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="0"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="181dp"
+                            tools:layout_editor_absoluteY="205dp">
 
-                    <LinearLayout
-                        android:id="@+id/the2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/venus"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="45"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="266dp"
-                        tools:layout_editor_absoluteY="35dp">
+                            <ImageView
+                                android:id="@+id/mercury"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:elevation="1dp"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/mercury" />
 
-                        <ImageView
-                            android:id="@+id/venus"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/venus" />
+                            <TextView
+                                android:id="@+id/mercuryName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/mercury"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/venusName"
+                        <LinearLayout
+                            android:id="@+id/the2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/venus"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/venus"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="45"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="266dp"
+                            tools:layout_editor_absoluteY="35dp">
 
-                    <LinearLayout
-                        android:id="@+id/the3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/earth"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="90"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="301dp"
-                        tools:layout_editor_absoluteY="120dp">
+                            <ImageView
+                                android:id="@+id/venus"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/venus" />
 
-                        <ImageView
-                            android:id="@+id/earth"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/earth" />
+                            <TextView
+                                android:id="@+id/venusName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/venus"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/earthName"
+                        <LinearLayout
+                            android:id="@+id/the3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/earth"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/earth"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="90"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="301dp"
+                            tools:layout_editor_absoluteY="120dp">
 
-                    <LinearLayout
-                        android:id="@+id/the4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/mars"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="135"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="266dp"
-                        tools:layout_editor_absoluteY="205dp">
+                            <ImageView
+                                android:id="@+id/earth"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/earth" />
 
-                        <ImageView
-                            android:id="@+id/mars"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/mars" />
+                            <TextView
+                                android:id="@+id/earthName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/earth"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/marsName"
+                        <LinearLayout
+                            android:id="@+id/the4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/mars"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/mars"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="135"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="266dp"
+                            tools:layout_editor_absoluteY="205dp">
 
-                    <LinearLayout
-                        android:id="@+id/the5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/jupiter"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="180"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="181dp"
-                        tools:layout_editor_absoluteY="240dp">
+                            <ImageView
+                                android:id="@+id/mars"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/mars" />
 
-                        <ImageView
-                            android:id="@+id/jupiter"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/jupiter" />
+                            <TextView
+                                android:id="@+id/marsName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/mars"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/jupiterName"
+                        <LinearLayout
+                            android:id="@+id/the5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/jupiter"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/jupiter"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="180"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="181dp"
+                            tools:layout_editor_absoluteY="240dp">
 
-                    <LinearLayout
-                        android:id="@+id/the6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/saturn"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="225"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="96dp"
-                        tools:layout_editor_absoluteY="205dp">
+                            <ImageView
+                                android:id="@+id/jupiter"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/jupiter" />
 
-                        <ImageView
-                            android:id="@+id/saturn"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/saturn" />
+                            <TextView
+                                android:id="@+id/jupiterName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/jupiter"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/saturnName"
+                        <LinearLayout
+                            android:id="@+id/the6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/saturn"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/saturn"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="225"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="96dp"
+                            tools:layout_editor_absoluteY="205dp">
 
-                    <LinearLayout
-                        android:id="@+id/the7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/uranus"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="270"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="61dp"
-                        tools:layout_editor_absoluteY="120dp">
+                            <ImageView
+                                android:id="@+id/saturn"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/saturn" />
 
-                        <ImageView
-                            android:id="@+id/uran"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/uranus" />
+                            <TextView
+                                android:id="@+id/saturnName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/saturn"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/uranusName"
+                        <LinearLayout
+                            android:id="@+id/the7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/uranus"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/uranus"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="270"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="61dp"
+                            tools:layout_editor_absoluteY="120dp">
 
-                    <LinearLayout
-                        android:id="@+id/the8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:tag="@string/neptune"
-                        app:layout_constraintCircle="@+id/sun"
-                        app:layout_constraintCircleAngle="315"
-                        app:layout_constraintCircleRadius="@dimen/distance_from_sun"
-                        tools:layout_editor_absoluteX="96dp"
-                        tools:layout_editor_absoluteY="35dp">
+                            <ImageView
+                                android:id="@+id/uran"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/uranus" />
 
-                        <ImageView
-                            android:id="@+id/neptun"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="center_horizontal"
-                            android:tag="planetImg"
-                            app:srcCompat="@drawable/neptune" />
+                            <TextView
+                                android:id="@+id/uranusName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/uranus"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/neptuneName"
+                        <LinearLayout
+                            android:id="@+id/the8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="sans-serif-condensed-light"
-                            android:tag="planetName"
-                            android:text="@string/neptune"
-                            android:textAlignment="center"
-                            android:textColor="#FFFFFF"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:orientation="vertical"
+                            android:tag="@string/neptune"
+                            app:layout_constraintCircle="@+id/sun"
+                            app:layout_constraintCircleAngle="315"
+                            app:layout_constraintCircleRadius="@dimen/distance_from_sun"
+                            tools:layout_editor_absoluteX="96dp"
+                            tools:layout_editor_absoluteY="35dp">
 
-                    <ImageView
-                        android:id="@+id/sun"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/sun" />
+                            <ImageView
+                                android:id="@+id/neptun"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center_horizontal"
+                                android:tag="planetImg"
+                                app:srcCompat="@drawable/neptune" />
+
+                            <TextView
+                                android:id="@+id/neptuneName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed-light"
+                                android:tag="planetName"
+                                android:text="@string/neptune"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/sun"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/sun" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -362,7 +405,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:visibility="invisible"
                 app:contentInsetStart="0dp"
-                app:layout_collapseMode="pin"/>
+                app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

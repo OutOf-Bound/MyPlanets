@@ -1,14 +1,16 @@
 package net.smartgekko.myplanets.views
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebViewClient
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.transition.ChangeBounds
+import androidx.constraintlayout.widget.Group
 import androidx.transition.Transition
 import androidx.transition.TransitionInflater
 import androidx.transition.TransitionManager
@@ -44,12 +46,6 @@ class MainActivity : AppCompatActivity() {
         binding.searchWebView.getSettings().setPluginState(WebSettings.PluginState.ON)
         binding.searchWebView.webViewClient = WebViewClient()
 
-        binding.leftStep.setOnClickListener {
-            rotateLeft()
-        }
-        binding.rightStep.setOnClickListener {
-            rotateRight()
-        }
 
         binding.sun.setOnClickListener {
             letsShowInfo(getString(R.string.sun),"")
@@ -57,81 +53,79 @@ class MainActivity : AppCompatActivity() {
         binding.appbar.addOnOffsetChangedListener(object: AppBarStateChangeListener() {
             override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
                 when(state) {
-                    State.COLLAPSED -> { binding.textPlanet.visibility = View.VISIBLE }
-                    State.EXPANDED -> { binding.textPlanet.visibility = View.INVISIBLE }
-                    State.IDLE -> { binding.textPlanet.visibility = View.INVISIBLE }
+                    State.COLLAPSED -> { binding.smallTumb.visibility = View.VISIBLE }
+                    State.EXPANDED -> { binding.smallTumb.visibility = View.INVISIBLE }
+                    State.IDLE -> { binding.smallTumb.visibility = View.INVISIBLE }
                 }
             }
         }
         )
 
+        binding.planetsGroup.setAllOnClickListener(View.OnClickListener {
+            val nameText: TextView = it.findViewWithTag("planetName")
+            letsShowOnePlanet(nameText.text.toString())
+        })
+        binding.sun.setOnClickListener {
+            letsShowOnePlanet(resources.getString(R.string.sun))
+        }
+
+        binding.onePlanetImage.setOnClickListener {
+            binding.onePlanet.visibility = View.INVISIBLE
+            binding.planetsLayout.visibility = View.VISIBLE
+        }
+
         letsShowInfo(getString(R.string.jupiter)," (планета)")
     }
 
-    private fun rotateRight() {
-
-        val transitionId: Int = R.transition.arc
-        val inflater: TransitionInflater = TransitionInflater.from(applicationContext)
-        val arcMotionTransition: Transition = inflater.inflateTransition(transitionId)
-
-        TransitionManager.beginDelayedTransition(binding.planetsLayout,arcMotionTransition)
-        rotateConstraints(ROTATE_RIGHT)
-    }
-
-    private fun rotateLeft() {
-        val transitionId: Int = R.transition.arc
-        val inflater: TransitionInflater = TransitionInflater.from(applicationContext)
-        val arcMotionTransition: Transition = inflater.inflateTransition(transitionId)
-
-        TransitionManager.beginDelayedTransition(binding.planetsLayout,arcMotionTransition)
-        rotateConstraints(ROTATE_LEFT)
-    }
-
-    private fun rotateConstraints(direction: Int) {
-        var currentPlanet = ""
-        for (item: LinearLayout in planetsArray) {
-            val params = item.getLayoutParams() as ConstraintLayout.LayoutParams
-            var currentAngle = params.circleAngle
-            val nameText: TextView = item.findViewWithTag("planetName")
-
-            when (direction) {
-                ROTATE_LEFT -> {
-                    currentAngle += 45
-                    if (currentAngle > 360) {
-                        params.circleAngle = 45f
-                    } else {
-
-                        params.circleAngle = currentAngle
-
-                    }
-                }
-                ROTATE_RIGHT -> {
-                    currentAngle -= 45
-                    if (currentAngle < 0) {
-                        params.circleAngle = 315f
-                    } else {
-                        params.circleAngle = currentAngle
-                    }
-                }
-            }
-
-            item.layoutParams = params
-            if (currentAngle == 180f) {
-                currentPlanet = item.tag.toString()
-                nameText.textSize = 30f
-            } else {
-                nameText.textSize = 12f
-            }
+    private fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
+        referencedIds.forEach { id ->
+            rootView.findViewById<View>(id).setOnClickListener(listener)
         }
-        letsShowInfo(currentPlanet," (планета)")
-
     }
+
 
     private fun letsShowInfo(currentPlanet: String, extendedString: String) {
         binding.searchWebView.loadUrl(WIKI_BASE_URL + currentPlanet + extendedString)
         binding.textPlanet.text = currentPlanet
         binding.textPlanet.text =currentPlanet
     }
+    private fun letsShowOnePlanet(onePlanetName:String){
+
+        binding.planetsLayout.visibility = View.INVISIBLE
+       when(onePlanetName){
+           resources.getString(R.string.sun) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.sun)
+           }
+           resources.getString(R.string.mercury) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.mercury)
+           }
+           resources.getString(R.string.venus) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.venus)
+           }
+           resources.getString(R.string.earth) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.earth)
+           }
+           resources.getString(R.string.mars) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.mars)
+           }
+           resources.getString(R.string.jupiter) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.jupiter)
+           }
+           resources.getString(R.string.saturn) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.saturn)
+           }
+           resources.getString(R.string.uranus) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.uranus)
+           }
+           resources.getString(R.string.neptune) ->{
+               binding.onePlanetImage.setImageResource(R.drawable.neptune)
+           }
+       }
+       // binding.onePlanetText.text = onePlanetName
+        binding.textPlanet.text = onePlanetName
+        binding.onePlanet.visibility = View.VISIBLE
+    }
+
 }
 
 
