@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebViewClient
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.transition.ChangeBounds
+import androidx.transition.Transition
+import androidx.transition.TransitionInflater
 import androidx.transition.TransitionManager
 import com.google.android.material.appbar.AppBarLayout
 import net.smartgekko.myplanets.R
@@ -16,6 +18,7 @@ import net.smartgekko.myplanets.databinding.ActivityMainBinding
 import net.smartgekko.myplanets.utils.ROTATE_LEFT
 import net.smartgekko.myplanets.utils.ROTATE_RIGHT
 import net.smartgekko.myplanets.utils.WIKI_BASE_URL
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -66,13 +69,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rotateRight() {
+
+        val transitionId: Int = R.transition.arc
+        val inflater: TransitionInflater = TransitionInflater.from(applicationContext)
+        val arcMotionTransition: Transition = inflater.inflateTransition(transitionId)
+
+        TransitionManager.beginDelayedTransition(binding.planetsLayout,arcMotionTransition)
         rotateConstraints(ROTATE_RIGHT)
-        TransitionManager.beginDelayedTransition(binding.planetsLayout)
     }
 
     private fun rotateLeft() {
+        val transitionId: Int = R.transition.arc
+        val inflater: TransitionInflater = TransitionInflater.from(applicationContext)
+        val arcMotionTransition: Transition = inflater.inflateTransition(transitionId)
+
+        TransitionManager.beginDelayedTransition(binding.planetsLayout,arcMotionTransition)
         rotateConstraints(ROTATE_LEFT)
-        TransitionManager.beginDelayedTransition(binding.planetsLayout)
     }
 
     private fun rotateConstraints(direction: Int) {
@@ -88,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                     if (currentAngle > 360) {
                         params.circleAngle = 45f
                     } else {
+
                         params.circleAngle = currentAngle
 
                     }
@@ -120,3 +133,5 @@ class MainActivity : AppCompatActivity() {
         binding.textPlanet.text =currentPlanet
     }
 }
+
+
