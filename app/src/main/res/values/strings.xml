@@ -11,4 +11,5 @@
     <string name="neptune">Neptune</string>
     <string name="planet"> (planet)</string>
     <string name="sun">Sun</string>
+    <string name="solar_system">Solar system</string>
 </resources>

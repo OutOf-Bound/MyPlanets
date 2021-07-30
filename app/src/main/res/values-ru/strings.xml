@@ -12,4 +12,5 @@
     <string name="neptune">Нептун</string>
     <string name="planet"> (планета)</string>
     <string name="sun">Солнце</string>
+    <string name="solar_system">Солнечная система</string>
 </resources>
