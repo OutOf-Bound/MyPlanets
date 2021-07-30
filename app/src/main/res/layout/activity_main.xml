@@ -33,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:visibility="invisible"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -62,49 +62,50 @@
                         app:srcCompat="@drawable/earth" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="match_parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="bottom|center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center|center_vertical"
                     android:orientation="horizontal"
                     android:paddingVertical="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/planetsLayout">
-
-                    <ImageView
-                        android:id="@+id/rightStep"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:visibility="invisible"
-                        app:srcCompat="@android:drawable/ic_media_rew" />
 
                     <TextView
                         android:id="@+id/textPlanet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="@string/jupiter"
                         android:textAlignment="center"
                         android:textColor="#FFFFFF"
                         android:textSize="24sp"
-                        android:visibility="visible" />
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_conversion_absoluteHeight="32dp"
+                        tools:layout_conversion_absoluteWidth="198dp" />
 
                     <ImageView
                         android:id="@+id/smallTumb"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_weight="1"
                         android:visibility="invisible"
-                        app:srcCompat="@drawable/planets_logo" />
+                        app:layout_constraintBottom_toBottomOf="@+id/textPlanet"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textPlanet"
+                        app:srcCompat="@drawable/planets_logo"
+                        tools:layout_conversion_absoluteHeight="50dp"
+                        tools:layout_conversion_absoluteWidth="115dp" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/planetsLayout"

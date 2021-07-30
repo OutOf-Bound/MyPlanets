@@ -17,15 +17,14 @@ import androidx.transition.TransitionManager
 import com.google.android.material.appbar.AppBarLayout
 import net.smartgekko.myplanets.R
 import net.smartgekko.myplanets.databinding.ActivityMainBinding
-import net.smartgekko.myplanets.utils.ROTATE_LEFT
-import net.smartgekko.myplanets.utils.ROTATE_RIGHT
-import net.smartgekko.myplanets.utils.WIKI_BASE_URL
+import net.smartgekko.myplanets.utils.*
+import net.smartgekko.myplanets.utils.ONE_PLANET_STATE
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var planetsArray: ArrayList<LinearLayout>
-    private lateinit var currentPlanetName: String
+    private var onePlanetView: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,14 +47,21 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.sun.setOnClickListener {
-            letsShowInfo(getString(R.string.sun),"")
+            letsShowInfo(getString(R.string.sun), "")
         }
-        binding.appbar.addOnOffsetChangedListener(object: AppBarStateChangeListener() {
+        binding.appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
             override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
-                when(state) {
-                    State.COLLAPSED -> { binding.smallTumb.visibility = View.VISIBLE }
-                    State.EXPANDED -> { binding.smallTumb.visibility = View.INVISIBLE }
-                    State.IDLE -> { binding.smallTumb.visibility = View.INVISIBLE }
+                when (state) {
+                    State.COLLAPSED -> {
+                        binding.smallTumb.visibility = View.VISIBLE
+                    }
+                    State.EXPANDED -> {
+                        checkAndSetCurrentState()
+                    }
+
+                    State.IDLE -> {
+                        checkAndSetCurrentState()
+                    }
                 }
             }
         }
@@ -64,17 +70,22 @@ class MainActivity : AppCompatActivity() {
         binding.planetsGroup.setAllOnClickListener(View.OnClickListener {
             val nameText: TextView = it.findViewWithTag("planetName")
             letsShowOnePlanet(nameText.text.toString())
+
         })
         binding.sun.setOnClickListener {
             letsShowOnePlanet(resources.getString(R.string.sun))
         }
 
         binding.onePlanetImage.setOnClickListener {
-            binding.onePlanet.visibility = View.INVISIBLE
-            binding.planetsLayout.visibility = View.VISIBLE
+            letsShowAllPlanets()
         }
 
-        letsShowInfo(getString(R.string.jupiter)," (планета)")
+        binding.smallTumb.setOnClickListener {
+            letsShowAllPlanets()
+            binding.appbar.setExpanded(true,true)
+        }
+
+        letsShowInfo(getString(R.string.jupiter), " (планета)")
     }
 
     private fun Group.setAllOnClickListener(listener: View.OnClickListener?) {
@@ -87,45 +98,80 @@ class MainActivity : AppCompatActivity() {
     private fun letsShowInfo(currentPlanet: String, extendedString: String) {
         binding.searchWebView.loadUrl(WIKI_BASE_URL + currentPlanet + extendedString)
         binding.textPlanet.text = currentPlanet
-        binding.textPlanet.text =currentPlanet
     }
-    private fun letsShowOnePlanet(onePlanetName:String){
+
+    private fun letsShowSolarSystemInfo() {
+        binding.searchWebView.loadUrl(WIKI_BASE_URL + getString(R.string.solar_system))
+        binding.textPlanet.text = getString(R.string.solar_system)
+    }
+
+    private fun letsShowOnePlanet(onePlanetName: String) {
+        var extendString = ""
 
         binding.planetsLayout.visibility = View.INVISIBLE
-       when(onePlanetName){
-           resources.getString(R.string.sun) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.sun)
-           }
-           resources.getString(R.string.mercury) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.mercury)
-           }
-           resources.getString(R.string.venus) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.venus)
-           }
-           resources.getString(R.string.earth) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.earth)
-           }
-           resources.getString(R.string.mars) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.mars)
-           }
-           resources.getString(R.string.jupiter) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.jupiter)
-           }
-           resources.getString(R.string.saturn) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.saturn)
-           }
-           resources.getString(R.string.uranus) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.uranus)
-           }
-           resources.getString(R.string.neptune) ->{
-               binding.onePlanetImage.setImageResource(R.drawable.neptune)
-           }
-       }
-       // binding.onePlanetText.text = onePlanetName
+        when (onePlanetName) {
+            resources.getString(R.string.sun) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.sun)
+            }
+            resources.getString(R.string.mercury) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.mercury)
+            }
+            resources.getString(R.string.venus) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.venus)
+            }
+            resources.getString(R.string.earth) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.earth)
+            }
+            resources.getString(R.string.mars) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.mars)
+            }
+            resources.getString(R.string.jupiter) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.jupiter)
+            }
+            resources.getString(R.string.saturn) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.saturn)
+            }
+            resources.getString(R.string.uranus) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.uranus)
+                extendString =" (планета)"
+            }
+            resources.getString(R.string.neptune) -> {
+                binding.onePlanetImage.setImageResource(R.drawable.neptune)
+            }
+        }
         binding.textPlanet.text = onePlanetName
         binding.onePlanet.visibility = View.VISIBLE
+        letsShowInfo(onePlanetName,extendString)
+        setCurrentState(ONE_PLANET_STATE)
     }
 
+    private fun letsShowAllPlanets() {
+        binding.onePlanet.visibility = View.INVISIBLE
+        binding.planetsLayout.visibility = View.VISIBLE
+        letsShowSolarSystemInfo()
+        setCurrentState(MULTI_PLANET_STATE)
+    }
+
+    private fun setCurrentState(state: Int) {
+        when (state) {
+            ONE_PLANET_STATE -> {
+                binding.smallTumb.visibility = View.VISIBLE
+                onePlanetView = true
+            }
+            else -> {
+                binding.smallTumb.visibility = View.INVISIBLE
+                onePlanetView = false
+            }
+        }
+    }
+
+    private fun checkAndSetCurrentState(){
+        if (onePlanetView) {
+            setCurrentState(ONE_PLANET_STATE)
+        } else {
+            setCurrentState(MULTI_PLANET_STATE)
+        }
+    }
 }
 
 
